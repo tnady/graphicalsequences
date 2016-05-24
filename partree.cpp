@@ -28,8 +28,9 @@ void child (partree &deg, bool skip, int lvl, int first, int second) {
         if (deg.binpush(lvl + 1, wall, newdegree)) del = false;
     }
     else {
-        if (newdegree[number - 1] > wall)
+        if (newdegree[number - 1] > wall) {
             if (deg.binpush(lvl + 1, wall, newdegree)) del = false;
+		}
     }
     if (del) delete[] newdegree;
 }
@@ -37,7 +38,7 @@ void child (partree &deg, bool skip, int lvl, int first, int second) {
 void steps (partree &deg, bool skip, int lvl, int start) {
 	int step = stop;
 	char *degree = deg.getdegree(lvl);
-	for (int i = number - 1; i > start; i--)
+	for (int i = number - 1; i > start; i--) {
 		if (degree[i] > step) {
             if (skip) child(deg, false, lvl, start, i);
             else {
@@ -45,6 +46,7 @@ void steps (partree &deg, bool skip, int lvl, int start) {
             }
             step = degree[i];
 		}
+	}
 }
 
 void paralg (partree &deg) {
@@ -55,17 +57,19 @@ void paralg (partree &deg) {
         while (s < deg.getsizeseq(i)) {
             int wall = deg.getwall(i);
             char *degree = deg.getdegree(i);
-            for (int j = 0; j < number - 1; j++)
+            for (int j = 0; j < number - 1; j++) {
                 if (degree[j] > degree[j + 1]) {
                     int step = 0;
 					if (degree[j] - 1 == degree[j + 1]) step = j + 1;
 					else step = j;
-                    for (int k = j + 1; k < number; k++)
+                    for (int k = j + 1; k < number; k++) {
                         if (degree[step] > degree[k]) {
                             parchild(deg, i, j, k);
                             step = k;
                         }
+					}
                 }
+			}
 			deg.nowstep(i);
             s++;
         }

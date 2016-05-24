@@ -23,8 +23,9 @@ class tree {
     public:
         tree () {
             level = 0;
-            if (stop)
+            if (stop) {
                 for (int i = 1; i < number; i++) level += i%2? i:i - 1;
+			}
 			else {
                 for (int i = 1; i < number; i++) level += i;
                 level++;
@@ -55,7 +56,7 @@ class tree {
         }
 
         ~tree () {
-            for (int i = 0; i < level; i++)
+            for (int i = 0; i < level; i++) {
                 while (sizeseq[i]) {
                     sequence *temp = head[i];
                     head[i] = head[i]->next;
@@ -63,6 +64,7 @@ class tree {
                     delete temp;
                     sizeseq[i]--;
                 }
+			}
             delete[] sizeseq;
             delete[] quantity;
             delete[] head;

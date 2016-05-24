@@ -12,19 +12,21 @@ void child (tree &deg, int first, int second) {
     if (wall > second) wall--;
     if (wall > first) wall--;
     bool del = true;
-    if (newdegree[number - 1] >= wall)
+    if (newdegree[number - 1] >= wall) {
         if (deg.binpush(deg.getcurrlevel() + 1, wall, newdegree)) del = false;
+	}
     if (del) delete[] newdegree;
 }
 
 void steps (tree &deg, int start) {
 	int step = stop;
     char *degree = deg.peekdegree();
-	for (int i = number - 1; i > start; i--)
+	for (int i = number - 1; i > start; i--) {
 		if (degree[i] > step) {
             child(deg, start, i);
             step = degree[i];
 		}
+	}
 }
 
 int algorithm (tree &deg) {
@@ -47,13 +49,14 @@ int algorithm (tree &deg) {
         }
     }
     int quantity = deg.getall();
-    if (!stop)
+    if (!stop) {
         if (deg.getodd()) {
             deg.setcurrlevel(level);
             int last = deg.getquantity();
             quantity = (quantity - last)*2 + last;
         }
         else quantity *= 2;
+	}
     return quantity;
 }
 
