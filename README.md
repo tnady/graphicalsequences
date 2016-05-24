@@ -1,0 +1,2 @@
+# graphicalsequences
+magister
